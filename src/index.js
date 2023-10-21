@@ -99,11 +99,12 @@ function knightMoves(board,knightPos,targPos){
     
             if(currKnighPosX === targX && currKnightPosY === targY){
                   const shortestPath = [];
-            let current = currKnightPos.toString();
+            let current = currKnightPos;
             while (current) {
                 shortestPath.push(current);
                 current = path[current];
             }
+             console.log(path)
             return shortestPath.reverse();
                 
             }
@@ -145,7 +146,7 @@ gameBoard.init()
 gameBoard.placeKnight(knight,[6,6])
 gameBoard.placeTarget({value:'K'},[1,1])
 
-console.log(knightMoves(gameBoard,[6,6],[0,0]))
+console.log(knightMoves(gameBoard,[0,0],[3,3]))
 
 
 
