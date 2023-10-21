@@ -88,6 +88,7 @@ function knightMoves(board,knightPos,targPos){
         const queue = [knightPos]
         const visited = new Set()
         const [targX,targY] = targPos
+        const path = {}
     
         while(queue.length > 0){
             const currKnightPos = queue.shift()
@@ -97,7 +98,13 @@ function knightMoves(board,knightPos,targPos){
     
     
             if(currKnighPosX === targX && currKnightPosY === targY){
-                return 'Found'
+                  const shortestPath = [];
+            let current = currKnightPos.toString();
+            while (current) {
+                shortestPath.push(current);
+                current = path[current];
+            }
+            return shortestPath.reverse();
                 
             }
     
@@ -110,6 +117,8 @@ function knightMoves(board,knightPos,targPos){
     
                 if(board.checkPossibleMove(newmove) && !visited.has(newmove.toString())){
                     queue.push(newmove)
+                    path[newmove.toString()] = currKnightPos
+
                 }
                 
                 console.log(queue)
@@ -136,7 +145,7 @@ gameBoard.init()
 gameBoard.placeKnight(knight,[6,6])
 gameBoard.placeTarget({value:'K'},[1,1])
 
-console.log(knightMoves(gameBoard,[6,6],[4,5]))
+console.log(knightMoves(gameBoard,[6,6],[0,0]))
 
 
 
